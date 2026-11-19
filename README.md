@@ -3,9 +3,9 @@
 [Run the Smart Energy Monitor simulation in Wokwi](https://wokwi.com/projects/481064308682924033)
 
 Team Information:
-Thanh Hoang Gia Duong
-Doan Huong Thuc Pham
-Ming Ou
+- Thanh Hoang Gia Duong
+- Doan Huong Thuc Pham
+- Ming Ou
 
 Project Description:
 Multi Circuit Smart Energy Monitor is an ESP32 and Wokwi educational prototype for three simulated electrical
