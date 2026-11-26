@@ -1,0 +1,34 @@
+Wokwi browser simulation | November 26, 2026
+Circuit: https://wokwi.com/projects/481151099323724801
+Loaded firmware: build/SmartEnergyMonitor.ino.bin
+Firmware boot message: OFFLINE UI DEMO | 120 V | $0.15/kWh | no NTP or MQTT
+
+Set the kitchen, HVAC and lights potentiometers to 51, 102 and 26 on Wokwi's
+0-1023 slider scale. The live page showed 420 W, a power graph, No active
+alarms and NET OFF. The green PAGE button cycled through the circuit totals
+and cost pages and back to the graph. The circuit page rounded the three
+values to 120 W, 239 W and 61 W. The cost page displayed $0.00, 0.0% budget,
+Off-peak, Base and Estimated cost.
+
+Raised only the kitchen slider to 818 (about 16 A). The OLED then showed
+300 W and TRIP Kitchen. The serial monitor reported zero kitchen watts and
+unchanged kitchen kWh while both remaining circuits stayed on and accrued
+energy. A short red ACK silenced the alarm while the trip remained latched.
+Lowered the kitchen slider to 256 (about 5 A). Kitchen remained tripped
+until the red button was held through the local rearm interval. Serial then
+reported 600.7 W for kitchen and its energy increased again.
+
+Selected serial readings copied from the running simulator:
+
+t=2583 ms audible_alarm=0 | Kitchen ON 119.6 W 0.00001993 kWh $0.00000299 | HVAC ON 239.1 W 0.00003985 kWh $0.00000598 | Lights ON 61.0 W 0.00001016 kWh $0.00000152
+t=9583 ms audible_alarm=0 | Kitchen ON 1918.8 W 0.00030239 kWh $0.00004536 | HVAC ON 239.1 W 0.00050481 kWh $0.00007572 | Lights ON 61.0 W 0.00012868 kWh $0.00001930
+t=10683 ms audible_alarm=1 | Kitchen TRIP 0.0 W 0.00035569 kWh $0.00005335 | HVAC ON 239.1 W 0.00057788 kWh $0.00008668 | Lights ON 61.0 W 0.00014730 kWh $0.00002210
+t=11683 ms audible_alarm=1 | Kitchen TRIP 0.0 W 0.00035569 kWh $0.00005335 | HVAC ON 239.1 W 0.00064430 kWh $0.00009664 | Lights ON 61.0 W 0.00016423 kWh $0.00002463
+t=12683 ms audible_alarm=0 | Kitchen TRIP 0.0 W 0.00035569 kWh $0.00005335 | HVAC ON 239.1 W 0.00071072 kWh $0.00010661 | Lights ON 61.0 W 0.00018116 kWh $0.00002717
+t=14683 ms audible_alarm=0 | Kitchen TRIP 0.0 W 0.00035569 kWh $0.00005335 | HVAC ON 239.1 W 0.00084357 kWh $0.00012653 | Lights ON 61.0 W 0.00021503 kWh $0.00003225
+t=16683 ms audible_alarm=0 | Kitchen ON 600.7 W 0.00053924 kWh $0.00008089 | HVAC ON 239.1 W 0.00097641 kWh $0.00014646 | Lights ON 61.0 W 0.00024889 kWh $0.00003733
+t=17683 ms audible_alarm=0 | Kitchen ON 600.7 W 0.00070611 kWh $0.00010592 | HVAC ON 239.1 W 0.00104283 kWh $0.00015642 | Lights ON 61.0 W 0.00026582 kWh $0.00003987
+
+The simulator run used physical slider quantization and the offline adapter.
+Its one-second UART cadence records before-and-after states. Exact boundary
+timing and the exact 60-second reference input run are covered by host tests.

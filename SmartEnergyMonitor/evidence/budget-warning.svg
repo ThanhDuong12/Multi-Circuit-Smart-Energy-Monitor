@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="256" viewBox="0 0 128 64">
+<title>Budget warning at $24</title>
+<desc>Host rendering of OLED draw calls. The font approximates the device glyphs.</desc>
+<rect width="128" height="64" fill="black"/>
+<g fill="white" font-family="monospace" font-size="8">
+<text x="0" y="7">L</text>
+<text x="6" y="7">I</text>
+<text x="12" y="7">V</text>
+<text x="18" y="7">E</text>
+<text x="30" y="7">P</text>
+<text x="36" y="7">O</text>
+<text x="42" y="7">W</text>
+<text x="48" y="7">E</text>
+<text x="54" y="7">R</text>
+<text x="110" y="7">1</text>
+<text x="116" y="7">/</text>
+<text x="122" y="7">3</text>
+<path d="M0.5 9.5 L127.5 9.5" stroke="white" stroke-linecap="square"/>
+<text x="0" y="19">1</text>
+<text x="6" y="19">2</text>
+<text x="12" y="19">0</text>
+<text x="18" y="19">0</text>
+<text x="30" y="19">W</text>
+<text x="68" y="19">6</text>
+<text x="74" y="19">0</text>
+<text x="86" y="19">s</text>
+<text x="98" y="19">t</text>
+<text x="104" y="19">r</text>
+<text x="110" y="19">e</text>
+<text x="116" y="19">n</text>
+<text x="122" y="19">d</text>
+<path d="M3.5 22.5 L3.5 42.5" stroke="white" stroke-linecap="square"/>
+<path d="M3.5 42.5 L125.5 42.5" stroke="white" stroke-linecap="square"/>
+<path d="M124.5 22.5 L124.5 22.5" stroke="white" stroke-linecap="square"/>
+<text x="0" y="53">A</text>
+<text x="6" y="53">c</text>
+<text x="12" y="53">t</text>
+<text x="18" y="53">i</text>
+<text x="24" y="53">v</text>
+<text x="30" y="53">e</text>
+<text x="42" y="53">a</text>
+<text x="48" y="53">l</text>
+<text x="54" y="53">e</text>
+<text x="60" y="53">r</text>
+<text x="66" y="53">t</text>
+<text x="72" y="53">s</text>
+<text x="0" y="63">B</text>
+<text x="6" y="63">U</text>
+<text x="12" y="63">D</text>
+<text x="18" y="63">8</text>
+<text x="24" y="63">0</text>
+<text x="30" y="63">%</text>
+<text x="42" y="63">N</text>
+<text x="48" y="63">E</text>
+<text x="54" y="63">T</text>
+<text x="66" y="63">O</text>
+<text x="72" y="63">F</text>
+<text x="78" y="63">F</text>
+</g>
+</svg>

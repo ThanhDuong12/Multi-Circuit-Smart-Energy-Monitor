@@ -1,0 +1,4 @@
+/build/
+/host_tests
+/host_tests.exe
+/*.obj
