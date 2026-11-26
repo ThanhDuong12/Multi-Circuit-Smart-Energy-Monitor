@@ -6,6 +6,10 @@
 
 The ESP32 Dev Module firmware compiled with Arduino CLI 1.3.1, Arduino-ESP32 2.0.17, Adafruit GFX 1.11.11, BusIO 1.17.4, and SSD1306 2.5.13. The build used 306,541 bytes of program storage and 22,464 bytes of global RAM. The merged Wokwi binary has SHA-256 `acd12d31b291a7ad068aa7643163d596998ec406ff3879b5bb31fc44e5099513`.
 
+In a separate run of the compiled firmware on the team's Wokwi circuit, the OLED cycled through all three pages. The circuit page displayed 120 W, 239 W and 61 W. Raising kitchen demand produced 1,918.8 W before the trip. After the trip, the serial output showed kitchen at 0.0 W with energy holding at 0.00035569 kWh across two successive readings. HVAC and lights remained on. A short ACK changed the audible alarm flag from 1 to 0 while kitchen stayed tripped. After demand was lowered, a sustained red-button hold restored kitchen to ON at 600.7 W.
+
+The [Wokwi session record](evidence/wokwi-session.txt) includes the slider settings, screen readings, and UART samples before and after each alarm action.
+
 | Check | Observed result | Evidence |
 | --- | --- | --- |
 | Normal loads for 60 simulated seconds | Kitchen 1.00 A → 120 W and 0.002 kWh. HVAC 2.00 A → 240 W and 0.004 kWh. Lights 0.50 A → 60 W and 0.001 kWh. Total 0.007 kWh and $0.00105 at $0.15/kWh. | [Host test log](evidence/host-test-results.txt) |
