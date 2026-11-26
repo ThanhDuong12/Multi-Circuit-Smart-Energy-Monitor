@@ -1,0 +1,4 @@
+[wokwi]
+version = 1
+firmware = "build/SmartEnergyMonitor.ino.bin"
+elf = "build/SmartEnergyMonitor.ino.elf"

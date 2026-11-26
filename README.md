@@ -2,6 +2,8 @@
 
 [Run the Smart Energy Monitor simulation in Wokwi](https://wokwi.com/projects/481151099323724801)
 
+Ming's [display and button demo](SmartEnergyMonitor/README.md) includes a runnable ESP32 sketch, three OLED pages, a 60-second power graph, alarm controls, and [acceptance results](SmartEnergyMonitor/ACCEPTANCE.md). The root sketch and linked Wokwi project are the team's original component check.
+
 Team Information:
 - Thanh Hoang Gia Duong
 - Doan Huong Thuc Pham

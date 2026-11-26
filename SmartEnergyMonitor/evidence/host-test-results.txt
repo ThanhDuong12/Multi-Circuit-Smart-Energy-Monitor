@@ -1,0 +1,20 @@
+Smart Energy Monitor | desktop host acceptance tests
+PASS  PAGE debounce, held-button behavior and page cycling
+PASS  ACK/rearm debounce, event timing and timer rollover
+PASS  60-second rolling graph at 5 Hz redraw cadence
+    K/H/L watts = 120/240/60, total energy = 0.007 kWh, unrounded cost = $0.00105
+PASS  60 seconds of known three-circuit loads at $0.15/kWh
+    $23.99995 clear; $24.00000 warning; $29.99995 warning only; $30.00000 audible alert. All relays stayed ON.
+PASS  Budget warnings at $24 and $30 without relay disconnection
+    Startup demand 13.999 / 14.000 / 14.001 A produced ON / TRIP / TRIP.
+PASS  Safe startup and the strict 14 A boundary
+    Accounted for 100 ms at 600 W and 200 ms at 1920 W before the trip; the off interval added zero kWh.
+PASS  Correct energy intervals across trip and rearm transitions
+    Missing (NaN), negative and above-range inputs isolated only kitchen; an invalid sample restarted its safe-demand timer.
+PASS  Isolation and recovery after invalid or missing current input
+    Recreated controller and UI: cleared kWh, costs, budget, history and page; first frame applied the new demand and tripped HVAC at 14 A.
+PASS  Offline simulation restart clears RAM and reevaluates demand
+    Kitchen tripped on frame 3, ACK preserved its latch, local rearm restored it, and a subsequent HVAC trip sounded again.
+PASS  Trip, acknowledgement, rearm and new alarm
+PASS  Three OLED pages, values, states and bounds
+11 passed, 0 failed

@@ -1,0 +1,73 @@
+name: OLED navigation, isolated kitchen trip and local rearm
+version: 1
+steps:
+  # Wait for recurring telemetry so a fast boot cannot race the scenario.
+  - wait-serial: 'audible_alarm=0 | Kitchen ON'
+  - set-control: {part-id: pot1, name: position, value: 0.25}
+  - set-control: {part-id: pot2, name: position, value: 0.10}
+  - set-control: {part-id: pot3, name: position, value: 0.025}
+  - delay: 2200ms
+  - expect-pin: {part-id: esp, name: '25', value: 1}
+  - expect-pin: {part-id: esp, name: '26', value: 1}
+  - expect-pin: {part-id: esp, name: '27', value: 1}
+  - expect-pin: {part-id: esp, name: '19', value: 0}
+  - take-screenshot: {part-id: oled1, save-to: ../evidence/wokwi-live.png}
+
+  # A 100 ms press spans the 30 ms debounce. Allow a full redraw after release.
+  - set-control: {part-id: btn1, name: pressed, value: 1}
+  - delay: 100ms
+  - set-control: {part-id: btn1, name: pressed, value: 0}
+  - delay: 350ms
+  - take-screenshot: {part-id: oled1, save-to: ../evidence/wokwi-circuits.png}
+  - set-control: {part-id: btn1, name: pressed, value: 1}
+  - delay: 100ms
+  - set-control: {part-id: btn1, name: pressed, value: 0}
+  - delay: 350ms
+  - take-screenshot: {part-id: oled1, save-to: ../evidence/wokwi-budget.png}
+  - set-control: {part-id: btn1, name: pressed, value: 1}
+  - delay: 100ms
+  - set-control: {part-id: btn1, name: pressed, value: 0}
+  - delay: 350ms
+
+  # Only the kitchen crosses 15 A. Check GPIO before waiting for the 1 Hz trace.
+  - set-control: {part-id: pot1, name: position, value: 0.80}
+  - delay: 400ms
+  - expect-pin: {part-id: esp, name: '25', value: 0}
+  - expect-pin: {part-id: esp, name: '26', value: 1}
+  - expect-pin: {part-id: esp, name: '27', value: 1}
+  - expect-pin: {part-id: esp, name: '19', value: 1}
+  - wait-serial: 'audible_alarm=1 | Kitchen TRIP 0.0 W'
+  - delay: 250ms
+  - take-screenshot: {part-id: oled1, save-to: ../evidence/wokwi-kitchen-trip.png}
+
+  # A short ACK silences the buzzer while the LED and kitchen latch remain active.
+  - set-control: {part-id: btn2, name: pressed, value: 1}
+  - delay: 100ms
+  - set-control: {part-id: btn2, name: pressed, value: 0}
+  - wait-serial: 'audible_alarm=0 | Kitchen TRIP 0.0 W'
+  - expect-pin: {part-id: esp, name: '25', value: 0}
+  - expect-pin: {part-id: esp, name: '19', value: 1}
+  - expect-pin: {part-id: esp, name: '18', value: 0}
+
+  # Lower the knob 1.6 s into a hold. At the two-second request, demand has
+  # been safe for only ~0.4 s. Keep holding past one safe second to check that
+  # a failed rearm cannot retry itself without a fresh deliberate press.
+  - set-control: {part-id: btn2, name: pressed, value: 1}
+  - delay: 1600ms
+  - set-control: {part-id: pot1, name: position, value: 0.25}
+  - delay: 1400ms
+  - expect-pin: {part-id: esp, name: '25', value: 0}
+  - set-control: {part-id: btn2, name: pressed, value: 0}
+  - delay: 150ms
+  - expect-pin: {part-id: esp, name: '19', value: 1}
+
+  # A fresh hold is now eligible. Check both sides of the two-second boundary.
+  - set-control: {part-id: btn2, name: pressed, value: 1}
+  - delay: 1800ms
+  - expect-pin: {part-id: esp, name: '25', value: 0}
+  - delay: 500ms
+  - expect-pin: {part-id: esp, name: '25', value: 1}
+  - expect-pin: {part-id: esp, name: '19', value: 0}
+  - set-control: {part-id: btn2, name: pressed, value: 0}
+  - wait-serial: 'audible_alarm=0 | Kitchen ON'
+  - take-screenshot: {part-id: oled1, save-to: ../evidence/wokwi-rearmed.png}
